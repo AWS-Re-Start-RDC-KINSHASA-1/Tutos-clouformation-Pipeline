@@ -1,0 +1,85 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+  MyEC2Instance:
+    Type: "AWS::EC2::Instance"
+    Properties:
+      ImageId: ami-07761f3ae34c4478d 
+      InstanceType: t2.micro
+      KeyName: BONN
+      SubnetId: subnet-0ad8abbd04af241d5
+      SecurityGroupIds:
+        - sg-0fd722fe55346382e
+  MyTargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      HealthCheckPath: "/"
+      HealthCheckProtocol: "HTTP"
+      HealthCheckPort: 80
+      Port: 80
+      Protocol: "HTTP"
+      Targets:
+        - Id: !Ref MyEC2Instance
+          Port: 80
+      VpcId: vpc-06786230ef35c9b38
+
+  MyLoadBalancer:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      Name: MyLoadBalancer
+      Subnets:
+        - subnet-0ad8abbd04af241d5
+        - subnet-078d8d8e743b25172
+      SecurityGroups:
+        - sg-0fd722fe55346382e
+      Scheme: internet-facing
+      LoadBalancerAttributes:
+        - Key: idle_timeout.timeout_seconds
+          Value: "60"
+      Tags:
+        - Key: Name
+          Value: MyLoadBalancer
+      IpAddressType: ipv4
+
+  MyListener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      DefaultActions:
+        - Type: forward
+          TargetGroupArn: !Ref MyTargetGroup
+      LoadBalancerArn: !Ref MyLoadBalancer
+      Port: 80
+      Protocol: HTTP
+
+  MyLaunchConfiguration:
+    Type: AWS::AutoScaling::LaunchConfiguration
+    Properties:
+      ImageId: ami-07761f3ae34c4478d
+      InstanceType: t2.micro
+      SecurityGroups:
+        - sg-0fd722fe55346382e
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          sudo yum update -y
+          sudo yum install httpd -y
+          sudo systemctl enable httpd
+          sudo systemctl start httpd
+          sudo echo '<html><body><h1>Hello, World!</h1></body></html>' > /var/www/html/index.html
+
+          # Additional setup and configurations here
+
+  MyAutoScalingGroup:
+    Type: AWS::AutoScaling::AutoScalingGroup
+    Properties:
+      AutoScalingGroupName: MyAutoScalingGroup
+      VPCZoneIdentifier:
+        - subnet-0ad8abbd04af241d5
+      LaunchConfigurationName: !Ref MyLaunchConfiguration
+      MinSize: 2
+      MaxSize: 4
+      DesiredCapacity: 2
+      HealthCheckType: EC2
+      HealthCheckGracePeriod: 300
+      TargetGroupARNs:
+        - !Ref MyTargetGroup
