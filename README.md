@@ -1,6 +1,9 @@
 # Tutos-clouformation-Pipeline
 Plusieurs questions se posent sur la manière de créer un pipeline avec CloudFormation. Si vous vous posez la même question, alors ce tutoriel est fait pour vous ! Dans ce tutoriel, nous allons apprendre comment déployer notre infrastructure EC2 avec un pipeline. Nous allons utiliser le même code pour cet exercice. Allons-y !
 Pour commencer, il faut créer un rôle pour CloudFormation en ajoutant l'accès à AmazonEC2FullAccess. Pour créer le rôle, il faut utiliser le service IAM pour cela.
+
+
+
 ![image](https://github.com/AWS-Re-Start-RDC-KINSHASA-1/Tutos-clouformation-Pipeline/assets/114914329/895cf57d-d14f-4c0a-be16-1eab42f4041d)
 
 
