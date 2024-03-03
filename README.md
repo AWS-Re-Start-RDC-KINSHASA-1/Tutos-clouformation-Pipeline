@@ -1,7 +1,6 @@
 # Tutos-clouformation-Pipeline
-Plusieurs questions sont posées de savoir comment faire du pipeline avec cloudformation, si vous vous posez la même question alors ce tuto est fait pour vous ! Dans ce tutos nous allons apprendre comment deployer notre infrastructure ec2 avec pipeline . nous allons utilisé le même code pour cet exercice . let's go! 
-Pour ce faire il faut créer un rôle pour cloud formation en ajoutant l'accès à AmazonEC2FullAcess . pour créer le rôle il faut utilisé le service IAM pour ça;
-
+Plusieurs questions se posent sur la manière de créer un pipeline avec CloudFormation. Si vous vous posez la même question, alors ce tutoriel est fait pour vous ! Dans ce tutoriel, nous allons apprendre comment déployer notre infrastructure EC2 avec un pipeline. Nous allons utiliser le même code pour cet exercice. Allons-y !
+Pour commencer, il faut créer un rôle pour CloudFormation en ajoutant l'accès à AmazonEC2FullAccess. Pour créer le rôle, il faut utiliser le service IAM pour cela.
 ![image](https://github.com/AWS-Re-Start-RDC-KINSHASA-1/Tutos-clouformation-Pipeline/assets/114914329/895cf57d-d14f-4c0a-be16-1eab42f4041d)
 
 
@@ -17,8 +16,8 @@ Pour ce faire il faut créer un rôle pour cloud formation en ajoutant l'accès 
 
 
 
-Choisissez Cloud formation comme option;
-Ensuite cliquez sur suivant;
+Choisissez CloudFormation comme option;
+Ensuite, cliquez sur Suivant;
 
 
 
@@ -33,8 +32,8 @@ Ensuite cliquez sur suivant;
 
 
 
-Cliquez sur suivant;
-Ensuite nomez votre rôle;
+Cliquez sur "suivant".
+Ensuite, nommez votre rôle.
 
 
 
@@ -45,9 +44,8 @@ Ensuite nomez votre rôle;
 
 
 
-Cliquez sur créer un rôle;
-Ensuite allez dans code commit, code commit nous permettra d'éxecuter notre code à partir du pipeline . Nos text se feront dans code commit;
-
+Cliquez sur "Créer un rôle";
+Ensuite, allez dans CodeCommit. CodeCommit nous permettra d'exécuter notre code à partir du pipeline. Nos textes se feront dans CodeCommit.
 
 
 
@@ -82,7 +80,7 @@ Il faut créer un référentiel;
 
 
 
-Dans l'option ajouter un fichier vous allez cliquer charger un fichier . comme je le dis au départ nous allons utilisé le même fichier(instance.yml);
+Dans l'option "Ajouter un fichier", vous allez cliquer sur "Charger un fichier". Comme je l'ai mentionné au départ, nous allons utiliser le même fichier (instance.yml).
 
 
 
@@ -96,7 +94,7 @@ Dans l'option ajouter un fichier vous allez cliquer charger un fichier . comme j
 
 
 
-Maintenant , allons sur pipeline pour deployer notre infrastructure avec cloud formation comme code source venant du code commit , mais avant ça il faut s'assurer que vous avez déja créer une pile dans votre cloud formation pour votre infranstrure ec2 nous en aurons besoin dans code pipeline , si vous ne l'avez pas fait , pas de problème allez sur ce lien  https://github.com/AWS-Re-Start-RDC-KINSHASA-1/Tutos-cloud-formation-ec2-instance.git vous trouverez les étapes pour créer.
+Maintenant, allons sur le pipeline pour déployer notre infrastructure avec CloudFormation en tant que code source provenant du code commit. Avant cela, assurez-vous d'avoir déjà créé une pile dans votre CloudFormation pour votre infrastructure EC2, car nous en aurons besoin dans le pipeline de code. Si vous ne l'avez pas encore fait, pas de problème, allez sur ce lien https://github.com/AWS-Re-Start-RDC-KINSHASA-1/Tutos-cloud-formation-ec2-instance.git où vous trouverez les étapes pour la création.
 
 
 
@@ -110,7 +108,7 @@ Maintenant , allons sur pipeline pour deployer notre infrastructure avec cloud f
 
 
 
-Ensuite nommez votre code pipeline et laissez les autres options par défaut ensuite cliquer sur suivant;
+Nommez ensuite votre code pipeline et laissez les autres options par défaut, puis cliquez sur suivant;
 
 
 
@@ -122,7 +120,7 @@ Ensuite nommez votre code pipeline et laissez les autres options par défaut ens
 
 
 
-Dans l'option fournisseur du code source , choisissez code commit ensuite  vous verrez le reférentiel et la branche ensuite cliquez sur suivant ;
+Dans l'option Fournisseur de code source, sélectionnez CodeCommit, puis vous verrez le référentiel et la branche. Ensuite, cliquez sur Suivant.
 
 
 
@@ -165,15 +163,15 @@ Ensuite cliquez suir créer;
 
 ![image](https://github.com/AWS-Re-Start-RDC-KINSHASA-1/Tutos-clouformation-Pipeline/assets/114914329/9542e21e-fed9-4bd4-8fc1-e562eae641a3)
 
-Après avoir cliquer sur créer , votre pipeline sera créé et il y'aura un message au dessus qui indique que le pipeline a été vraiment créé et à côté y'aura de check en cours et si tout a été bient ses deux checks seront en vert ce qui prouve que votre pipeline a marché , voici un aperçu;
+Après avoir cliqué sur "créer", votre pipeline sera créé et un message s'affichera au-dessus indiquant que le pipeline a été effectivement créé. À côté, il y aura des cases à cocher en cours et si tout s'est bien passé, ces deux cases seront vertes, ce qui prouve que votre pipeline a fonctionné. Voici un aperçu :
 
 
 
 ![image](https://github.com/AWS-Re-Start-RDC-KINSHASA-1/Tutos-clouformation-Pipeline/assets/114914329/95002176-9115-42b6-901e-8e8f9055a834)
 
 
-Passons maintenat au test . rentront dans notre commit pour modifier notre fichier et voir si le pipelin réçevra nos modifications.
-J'ai apporté de modification sur la taille au lieu t2.micro c'est t2.small  et j'ai remplacé le world par guys .
+Passons maintenant au test. Rentrons dans notre commit pour modifier notre fichier et voir si le pipeline recevra nos modifications.
+J'ai apporté des modifications sur la taille, au lieu de t2.micro c'est t2.small, et j'ai remplacé "world" par "guys".
 
 
 ![image](https://github.com/AWS-Re-Start-RDC-KINSHASA-1/Tutos-clouformation-Pipeline/assets/114914329/43eb2bba-ef95-4d4c-864a-6cb575600cd6)
@@ -182,11 +180,11 @@ J'ai apporté de modification sur la taille au lieu t2.micro c'est t2.small  et 
 ![image](https://github.com/AWS-Re-Start-RDC-KINSHASA-1/Tutos-clouformation-Pipeline/assets/114914329/f6c48492-d815-4a6c-a8c7-9fd799bc046d)
 
 
-Ensuite rentrez sur pipeline pour voir si nos modifications ont été mises à jours , il faut actualisez pour voir le processus. ça peut prendre du temps ;
+Ensuite, retournez sur le pipeline pour vérifier si nos modifications ont été mises à jour. Il faut actualiser pour voir le processus. Cela peut prendre du temps;
 
 ![image](https://github.com/AWS-Re-Start-RDC-KINSHASA-1/Tutos-clouformation-Pipeline/assets/114914329/9bccc213-e0ac-411d-a244-ecf544310afa)
 
-Voici le résultat final si vous avez deux check donc les modifications ont été apportés sur pipeline;
+Voici le résultat final si vous avez effectué deux vérifications et que des modifications ont été apportées au pipeline;
 
 ![image](https://github.com/AWS-Re-Start-RDC-KINSHASA-1/Tutos-clouformation-Pipeline/assets/114914329/fec957b3-b629-42af-b570-e2b96c2adb90)
 
